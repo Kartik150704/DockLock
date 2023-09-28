@@ -1,0 +1,17 @@
+.how-docklock-works-about
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center ;
+  align-items: center;
+  font-weight: bold;
+
+}
+
+.about-documentation1
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}

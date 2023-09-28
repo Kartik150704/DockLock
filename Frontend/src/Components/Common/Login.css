@@ -1,0 +1,85 @@
+/* YourStyles.css */
+.login-options {
+    display: flex;
+    height: 68vh;
+    /* align-items: flex-start; */
+    align-items: center;
+    justify-content: space-between;
+    /* margin: 20px; */
+    color: black;
+    /* background-image: linear-gradient(to right, #000000, #5b5959, #191a1a); */
+}
+
+.login-section {
+    display: flex;
+    text-align: center;
+    padding: 20px;
+    width: calc(50% - 20px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #f5f5f5; */
+    border-radius: 5px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.left-section {
+    margin-right: 20px;
+}
+
+.right-section {
+    margin-left: 20px;
+}
+
+.login-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    /* background-image: linear-gradient(to right, #0074d9, #ff4136); */
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* color: transparent; */
+}
+
+.login-section p {
+    font-size: 16px;
+    /* color: #777; */
+    margin-bottom: 20px;
+}
+
+/* Add a shadowed line between sections */
+.login-options::before {
+    content: '';
+    width: 1px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Style the buttons */
+.user-login-btn,
+.issuer-login-btn {
+    padding: 12px 24px; /* Adjust the padding as needed */
+    font-size: 16px;
+    font-weight: bold; /* Make the text bold */
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+.user-login-btn:hover,
+.issuer-login-btn:hover {
+    /* background: linear-gradient(to right, #0056b3, #ff4136); */
+    /* transform: scale(1.2); */
+    /* background-color: white;
+    color: black;
+    transition: background-color .6s; */
+}
+
+@media (max-width: 736px) {
+    .login-options {
+        flex-direction: column;
+
+    }
+}

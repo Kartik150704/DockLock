@@ -1,0 +1,50 @@
+/* UserLoginPage.css */
+.user-login-page {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    /* background: linear-gradient(to right, #191a1a, #817d7d); */
+    color: black;
+    /* border-radius: 5px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    width: '100%';
+    margin: 0 auto;
+    height: 50vh;
+  }
+  
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .google-login-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    /* background: linear-gradient(to right, #191a1a, #817d7d, #191a1a); */
+    /* color: white; */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: auto;
+    transition: background-color 0.3s ease;
+    
+  }
+  
+  .google-login-btn span {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .google-login-btn:hover {
+    /* background: linear-gradient(to right, #151616, #6d6969, #151616); */
+  }
+  

@@ -1,0 +1,82 @@
+/* Design1.module.css */
+/* CSS file (e.g., Design1.css) */
+.design1-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999; /* Adjust the z-index value to ensure it's displayed on top */
+  /* Additional styling for your component */
+}
+
+.landingAnimation {
+  background: linear-gradient(
+    72.12deg,
+    #b7b7be 34.72%,
+    #d7d4d4 75.75%,
+    #ffffff 100%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  overflow: hidden;
+  text-align: center;
+  font-size: 28px;
+}
+
+/* Sine Wave Animation Effect */
+.svgWaves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 180px;
+}
+
+@media (max-width: 767px) {
+  .svgWaves {
+    height: 80px;
+  }
+}
+
+.svgWavesParallax > use {
+  animation: moveForever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+.svgWavesParallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+  fill: rgba(180, 184, 176, 0.7);
+}
+
+.svgWavesParallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+  fill: rgba(207, 212, 213, 0.5);
+}
+
+.svgWavesParallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+  fill: rgba(209, 200, 195, 0.493);
+}
+
+.svgWavesParallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+  fill: rgb(206, 202, 195);
+}
+
+@keyframes moveForever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}

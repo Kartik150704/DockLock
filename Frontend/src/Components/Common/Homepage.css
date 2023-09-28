@@ -1,0 +1,17 @@
+/* Button.css */
+
+.start-button {
+  background-color: #007bff; /* Choose your desired background color */
+  color: #ffffff; /* Choose your desired text color */
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.start-button:hover {
+  background-color: #0056b3; /* Change the background color on hover */
+  transform: scale(1.05); /* Add a slight scale effect on hover */
+}

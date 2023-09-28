@@ -1,0 +1,74 @@
+/* UserForm.css */
+.user-form {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .form-container {
+    /* background-color: #f5f5f5; */
+    /* color: black; */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    /* max-width: 600px; */
+    width: '100%';
+    margin: 0 auto;
+  }
+  
+  .form-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form-field {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: bold;
+    
+  }
+  
+  .retrieve-form-input {
+    /* width: 100%; */
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 30px;
+    font-size: 16px;
+    
+  }
+  
+  .form-button {
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-button:hover {
+    transform: scale(1.1);
+    transition: transform 0.4s;
+  }
+  
+  .selected-file {
+    margin-top: 20px;
+  }
+  
+  .selected-file-heading {
+    font-size: 20px;
+  }
+  
+  .selected-file-name {
+    font-size: 16px;
+  }
+  
+  .reference-link {
+    font-size: 16px;
+  }
+  

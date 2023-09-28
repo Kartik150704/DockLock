@@ -1,0 +1,86 @@
+/* Navbar.css */
+.navbar {
+  /* background-color: rgb(137, 4, 139);   */
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  /* background-image: linear-gradient(to right, #191a1a, #f7f0f0,#191a1a); */
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-logo {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-button-login {
+  width: auto;
+  height: 6vh;
+  padding: 10px 20px;
+  /* Adjust the padding as needed */
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  /* Make the text bold */
+  cursor: pointer;
+}
+
+.navbar-button-signup {
+  width: auto;
+  height: 6vh;
+  padding: 10px 20px;
+  /* Adjust the padding as needed */
+  background-color: rgb(0, 0, 0);
+  border: 1px solid black;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  /* Make the text bold */
+  cursor: pointer;
+}
+
+
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 3px 0;
+  transition: all 0.3s ease;
+}
+
+.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* @media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-hamburger {
+    display: flex;
+  }
+} */

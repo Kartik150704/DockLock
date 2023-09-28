@@ -1,0 +1,99 @@
+/* LetterAnimation.css */
+
+.letter-animation {
+
+    font-weight: bold;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.letter-animation h1 {
+    font-size: 90px;
+    font-weight: bold;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* CSS animation to reveal letters */
+@keyframes revealLetters {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+/* MainBody.css */
+.secondary-text {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    /* Transition over 2 seconds with ease-in-out timing function */
+}
+
+.secondary-text.visible {
+    opacity: 1;
+}
+
+.main-body-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+.main-body-buttons button {
+    width: auto;
+    height: 6vh;
+    padding: 10px 20px;
+    /* Adjust the padding as needed */
+    background-color: rgb(0, 0, 0);
+    border: 1px solid black;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    /* Make the text bold */
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.main-body-buttons button {
+    display: inline-block;
+    /* Display buttons inline */
+
+    opacity: 0;
+    /* Initially hide the buttons */
+    transform: translateY(20px);
+    /* Initial position outside the viewport */
+    transition: opacity 0.5s, transform 0.5s;
+    /* Add transitions for opacity and position */
+}
+
+/* Make buttons visible when the .visible class is applied */
+.main-body-buttons button.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 571px) {
+    .letter-animation h1 {
+        font-size: 60px;
+        font-weight: bold;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        margin-bottom: 8vh;
+    }
+
+}

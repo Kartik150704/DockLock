@@ -1,0 +1,76 @@
+/* Footer.css (or any appropriate CSS file) */
+
+/* Style the footer section */
+.footer {
+  background-color: #1C1D1F;
+  /* Background color for the footer */
+  color: white;
+  /* Text color */
+  padding: 25px 0px 20px;
+  text-align: center;
+  /* Center-align text */
+  /* Position the footer absolutely */
+  /* bottom: 0; */
+  /* Stick it to the bottom of the viewport */
+  width: 100%;
+  /* Full width */
+}
+
+/* Style the copyright notice */
+.footer-copyright {
+  font-size: 18px;
+  /* Font size for the copyright notice */
+  font-weight: bold;
+  /* Make it bold */
+}
+
+/* Style the section containing social media links, about, and documentation links */
+.footer-alllinks {
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+.footer-links {
+  margin-top: 20px;
+  /* Spacing between the copyright and links */
+
+}
+
+/* Style individual links */
+.footer-links a {
+  display: block;
+  /* Display each link on a new line */
+  text-decoration: none;
+  /* Remove underlines from links */
+  color: white;
+  /* Text color for links */
+  font-size: 16px;
+  /* Font size for links */
+  margin: 10px 0;
+  /* Spacing between links */
+}
+
+/* Style links on hover */
+.footer-links a:hover {
+  text-decoration: underline;
+  /* Underline links on hover */
+}
+
+.footer-settle {
+  display: flex;
+  flex-direction: column-reverse;
+  min-height: auto;
+  justify-content: flex-end;
+  align-items: flex-start;
+  overflow-y: auto;
+  bottom: 0;
+  /* width: 100vw;  */
+  
+}
+
+.footer-settle-bottom
+{
+    min-height: 19vh;
+   
+}

@@ -1,0 +1,78 @@
+/* VerifyForm.css */
+.verify-form {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .form-container {
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .form-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form-field {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .form-input {
+    /* width: 100%; */
+    padding: 10px;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .form-button {
+    background-color: black;
+    /* color: black; */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-button:hover {
+    transform: scale(1.1);
+    transition: transform 0.4s;
+  }
+  
+  .form-message {
+    font-size: 16px;
+  }
+  
+  .public-key-section {
+    margin-top: 20px;
+  }
+  
+  .public-key-heading {
+    font-size: 20px;
+  }
+  
+  .result-section {
+    margin-top: 20px;
+  }
+  
+  .result-heading {
+    font-size: 24px;
+  }
+  
+  .result-info {
+    font-size: 16px;
+  }
+  

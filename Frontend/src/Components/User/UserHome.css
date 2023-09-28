@@ -1,0 +1,45 @@
+/* UserSection.css */
+.user-section-container {
+    width: '100%';
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    /* background-image: linear-gradient(to right, #191a1a, #bebbbb); */
+    background-color: white;
+    color: black;
+    /* border-radius: 5px; */
+    padding: 20px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tab-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .tab {
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .tab::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.3s ease; /* Add the transition here */
+  }
+  
+  .tab.active::before {
+    width: 100%;
+  }
+  
+  .section-content {
+    /* Add styles for section content here */
+  }
+  

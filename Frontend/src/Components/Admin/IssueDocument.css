@@ -1,0 +1,79 @@
+/* styles.css */
+.issuer-container {
+  /* max-width: 600px; */
+  /* width: '100%'; */
+  margin: 0 auto;
+  padding: 20px;
+  
+  color: BLACK;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.issuer-gmail {
+  font-size: 24px;
+  color: #333;
+}
+
+.issuer-container {
+  font-size: 16px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+
+
+.issuer-form-label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  /* color: #333; */
+}
+
+.issuer-form-input {
+  /* width: 100%; */
+  padding: 10px;
+  margin: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px;
+    border: 1px solid black;
+    border-radius: 30px;
+    font-size: 16px;
+}
+.issuer-form-input-pdffile {
+  /* width: 100%; */
+  padding: 10px;
+  margin: 15px;
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px;
+    border: 0px solid black;
+    border-radius: 30px;
+    font-size: 16px;
+}
+.issuer-form-button {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.issuer-form-button:hover {
+  /* background-color: #0056b3; */
+}
+
+.issuer-error {
+  color: #ff0000;
+  margin-top: 10px;
+}

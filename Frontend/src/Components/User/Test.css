@@ -1,0 +1,41 @@
+/* PdfUpload.css */
+
+.pdf-upload-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .pdf-upload-container label {
+    font-weight: bold;
+  }
+  
+  .pdf-upload-container input[type="file"] {
+    margin: 10px 0;
+  }
+  
+  .pdf-upload-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .pdf-upload-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Add a fade-out animation */
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
