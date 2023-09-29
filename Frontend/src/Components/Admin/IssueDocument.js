@@ -98,7 +98,10 @@ const IssueDocument = () => {
             
             {userType === 'admin' && (
                 <div className="issuer-container">
-                    {showLoadingScreen && <LoadingScreen />}
+                    {showLoadingScreen && 
+                    <LoadingScreen>
+                        <h2>Saving the Data.....</h2>
+                    </LoadingScreen>}
                     <h2>Document Form</h2>
                     <form onSubmit={handleSubmit}>
                         <div>

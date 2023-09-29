@@ -6,6 +6,8 @@ import './Homepage.css';
 import Footer from "./Footer.js";
 import Navbar from "./Navbar.js";
 import MainBody from "./MainBody.js";
+import LoadingScreen from "../Screens/LoadingScreen.js";
+
 const HomePage = () => {
   const navigate = useNavigate();
   return (
@@ -16,6 +18,7 @@ const HomePage = () => {
       <Navbar/>
       <MainBody/>
       <Footer/>
+
     </div>
   );
 };

@@ -67,6 +67,12 @@ const UserHome = () => {
         >
           Verify Documents
         </div>
+        <div
+          className={`tab ${activeTab === "logout" ? "active" : ""}`}
+          onClick={LogOut}
+        >
+          Log Out
+        </div>
       </div>
       <div className="section-content">
         {activeTab === "Documents" && <MyDocuments />}

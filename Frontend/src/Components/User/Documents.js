@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import fetchAPI from "../API'S/FetchAPI";
 import { CommonValueProvider, useCommonValue } from "../ContextAPI/ContextAPI";
 import { StoreToBlockchain, StoreDataReference } from "../Blockchain/UserFunctions";
+import LoadingScreen from "../Screens/LoadingScreen";
 import './Documents.css'
 const MyDocuments = () => {
   const { getCommonValue, saveCommonValue } = useCommonValue();
@@ -9,6 +10,7 @@ const MyDocuments = () => {
   const [userName, setUserName] = useState('');
   const [privateKey, setPrivateKey] = useState("");
   const [userType, setUserType] = useState(null)
+  const [showLoadingScreen,setShowLoadingScreen]=useState(false)
   const [documents, setDocuments] = useState([
 
   ]);
@@ -44,9 +46,11 @@ const MyDocuments = () => {
       alert("Please upload your private key file first.");
       return;
     }
+    setShowLoadingScreen(true)
     // console.log(privateKey)
     let tx = await AddDataToBlockchain(privateKey, documentId)
     console.log(tx)
+    setShowLoadingScreen(false)
 
 
   };
@@ -67,6 +71,8 @@ const MyDocuments = () => {
   };
 
   const AddDataToBlockchain = async (privateKey, DocId) => {
+
+    
     let userData = {
       gmail: userEmail,
       DocId: DocId,
@@ -93,11 +99,14 @@ const MyDocuments = () => {
 
     }
     
-
     let tx = await StoreToBlockchain(transactionData);
+    console.log(tx)
     if (tx) {
+      
+      console.log(response.ReferenceLink)
+      
       let tx = await StoreDataReference(privateKey, DocId, response.ReferenceLink);
-      console.log(tx)
+      
       await fetchAPI("http://localhost:8000/user/updatestatus", userData, "POST");
     }
     return tx;
@@ -105,8 +114,11 @@ const MyDocuments = () => {
 
   return (
     <div className="document-list-container">
+    {showLoadingScreen && <LoadingScreen>
+      <h2>Claiming the Document....</h2>
+    </LoadingScreen>}
       <h2>Document List</h2>
-      {MyDocuments.length==0 && <p>All Documents are Collected already</p>}
+      {documents.length==0 &&  <p>All Documents are Collected already</p>}
       <ul className="document-list">
         {documents.map((pendingDocument) => (
           <li key={pendingDocument.DocId} className="document-item">
@@ -126,10 +138,10 @@ const MyDocuments = () => {
         id="fileInput"
         className="file-input"
       />
-      {MyDocuments.length!=0 && <label htmlFor="fileInput" className="upload-label">
+      {documents.length!=0 && <label htmlFor="fileInput" className="upload-label">
         Upload Private Key
       </label>}
-      {MyDocuments.length!=0 && <p>These are the Documents , You can claim these to store to blockchain</p>}
+      {documents.length!=0 && <p>These are the Documents , You can claim these to store to blockchain</p>}
     </div>
   );
 };
