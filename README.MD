@@ -1,5 +1,6 @@
 # DockLock Document Verification Platform
 
+
 Welcome to DockLock, the cutting-edge document verification platform powered by blockchain technology. DockLock provides a secure and efficient way to verify the authenticity of documents, ensuring their integrity and making document tampering nearly impossible. This README will guide you through the key features of DockLock and how to get started.
 
 ## Features
