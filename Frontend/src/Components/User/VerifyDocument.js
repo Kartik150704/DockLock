@@ -67,7 +67,7 @@ const VerifyDocument = () => {
       publicKey: publicKey,
       signature: documentData.signature
     }
-    let response = await fetchAPI("http://localhost:8000/verifysignature", stampData, "POST")
+    let response = await fetchAPI("https://doclock-backend.onrender.com/verifysignature", stampData, "POST")
 
     if (response) {
       setDocumentStatus("Document is original and not tempered")

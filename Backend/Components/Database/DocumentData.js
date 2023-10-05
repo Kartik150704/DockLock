@@ -10,13 +10,13 @@ const client = new Client({
 });
 
 
-// client.connect((err) => {
-//   if (err) {
-//     console.error('Error connecting to PostgreSQL: ' + err.stack);
-//     return;
-//   }
-//   console.log('Connected to PostgreSQL as process id ' + process.pid);
-// });
+client.connect((err) => {
+  if (err) {
+    console.error('Error connecting to PostgreSQL: ' + err.stack);
+    return;
+  }
+  console.log('Connected to PostgreSQL as process id ' + process.pid);
+});
 
 const insertDocumentData = async (data) => {
   const query = `

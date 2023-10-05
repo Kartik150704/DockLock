@@ -34,7 +34,7 @@ const UserSignUp = () => {
                 userName: response.displayName,
                 check: true
             }
-            response = await fetchAPI("http://localhost:8000/user/signup", userData, "POST")
+            response = await fetchAPI("https://doclock-backend.onrender.com/user/signup", userData, "POST")
             console.log(response)
             try {
 
@@ -43,7 +43,7 @@ const UserSignUp = () => {
 
                     setTransaction("Successful!")
                     userData.check = false
-                    response = await fetchAPI("http://localhost:8000/user/signup", userData, "POST")
+                    response = await fetchAPI("https://doclock-backend.onrender.com/user/signup", userData, "POST")
                     if (response.signup) {
                         alert("User has signed up successfully , Now You can login")
                         setIsSignedUp(true);

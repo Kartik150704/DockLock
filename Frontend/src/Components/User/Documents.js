@@ -33,7 +33,7 @@ const MyDocuments = () => {
       let userData = {
         gmail: email
       }
-      let pendingDocuments = await fetchAPI("http://localhost:8000/user/fetchpendingdocument", userData, "POST")
+      let pendingDocuments = await fetchAPI("https://doclock-backend.onrender.com/user/fetchpendingdocument", userData, "POST")
       setDocuments(pendingDocuments)
 
     }
@@ -78,14 +78,14 @@ const MyDocuments = () => {
       DocId: DocId,
       userName:userName
     }
-    let response = await fetchAPI("http://localhost:8000/user/claimdocument", userData, "POST");
+    let response = await fetchAPI("https://doclock-backend.onrender.com/user/claimdocument", userData, "POST");
     let stampData = {
       documentHash: response.DocumentHash,
       privateKey: privateKey
     }
 
     console.log(response)
-    let documentData = await fetchAPI("http://localhost:8000/createstamp", stampData, "POST");
+    let documentData = await fetchAPI("https://doclock-backend.onrender.com/createstamp", stampData, "POST");
 
     let signature = documentData.signature
     response.DocId=await (response.DocId).toString()
@@ -107,7 +107,7 @@ const MyDocuments = () => {
       
       let tx = await StoreDataReference(privateKey, DocId, response.ReferenceLink);
       
-      await fetchAPI("http://localhost:8000/user/updatestatus", userData, "POST");
+      await fetchAPI("https://doclock-backend.onrender.com/user/updatestatus", userData, "POST");
     }
     return tx;
   };

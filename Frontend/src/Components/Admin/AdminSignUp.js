@@ -33,7 +33,7 @@ const AdminSignUp = () => {
                 userName: response.displayName,
                 check: true
             }
-            response = await fetchAPI("http://localhost:8000/issuer/signup", userData, "POST")
+            response = await fetchAPI("https://doclock-backend.onrender.com/issuer/signup", userData, "POST")
             console.log(response)
             try {
 
@@ -44,7 +44,7 @@ const AdminSignUp = () => {
                     if (tx) {
                         setTransaction("Successful!")
                         userData.check = false
-                        response = await fetchAPI("http://localhost:8000/issuer/signup", userData, "POST")
+                        response = await fetchAPI("https://doclock-backend.onrender.com/issuer/signup", userData, "POST")
                         if (response.signup) {
                             alert("User has signed up successfully , you can login now")
                             setIsSignedUp(true);

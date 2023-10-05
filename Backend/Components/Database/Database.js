@@ -2,11 +2,11 @@ const { Client } = require('pg');
 
 // Create a PostgreSQL client with your ElephantSQL credentials
 const client = new Client({
-  user: 'nxnfvhmo',                    // User
-  host: 'satao.db.elephantsql.com',    // Host
-  database: 'nxnfvhmo',                // User & Default database
-  password: '6T9U1vBsbhd1b3mTBM4t_FJFwsW5buu3',           // Password (replace 'your-password' with your actual password)
-  port: 5432,                          // Default PostgreSQL port
+  user: 'nxnfvhmo',                    
+  host: 'satao.db.elephantsql.com',    
+  database: 'nxnfvhmo',               
+  password: '6T9U1vBsbhd1b3mTBM4t_FJFwsW5buu3',           
+  port: 5432,                          
 });
 
 client.connect((err) => {
@@ -76,5 +76,5 @@ module.exports = {
   isUserPresent,
   fetchAllFromDatabase,
   deleteAllFromDatabase,
-  client
+  
 };

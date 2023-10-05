@@ -18,7 +18,7 @@ const AdminLogin = () => {
                 gmail: response.userEmail,
                 userName: response.displayName
             }
-            response = await fetchAPI("http://localhost:8000/user/login", userData, "POST")
+            response = await fetchAPI("https://doclock-backend.onrender.com/issuer/login", userData, "POST")
             if (response.login) {
                 saveCommonValue("userEmail", userData.gmail)
                 saveCommonValue("userName", userData.userName)

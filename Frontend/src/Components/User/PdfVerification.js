@@ -133,7 +133,7 @@ function PdfUpload() {
     };
 
 
-    fetch('http://localhost:8000/createstamp', requestOptions)
+    fetch('https://doclock-backend.onrender.com/createstamp', requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -193,7 +193,7 @@ function PdfUpload() {
       body: JSON.stringify(data),
     };
 
-    let response = await fetch('http://localhost:8000/verifysignature', requestOptions);
+    let response = await fetch('https://doclock-backend.onrender.com/verifysignature', requestOptions);
     response = await response.json();
     console.log(response)
     if (response) {
