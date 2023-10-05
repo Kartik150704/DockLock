@@ -1,118 +1,103 @@
-const mysql = require('mysql2');
+const { Client } = require('pg');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Kartik@1507',
-    database: 'sih',
+// Create a PostgreSQL client with your ElephantSQL credentials
+const client = new Client({
+  user: 'nxnfvhmo',                    // User
+  host: 'satao.db.elephantsql.com',    // Host
+  database: 'nxnfvhmo',                // User & Default database
+  password: '6T9U1vBsbhd1b3mTBM4t_FJFwsW5buu3',           // Password (replace 'your-password' with your actual password)
+  port: 5432,                          // Default PostgreSQL port
 });
 
-connection.connect((err) => {
-    if (err) {
-        console.error('Error connecting to MySQL: ' + err.stack);
-        return;
-    }
-
+client.connect((err) => {
+  if (err) {
+    console.error('Error connecting to PostgreSQL: ' + err.stack);
+    return;
+  }
+  console.log('Connected to PostgreSQL as process id ' + process.pid);
 });
 
-const insertDocumentData = (data) => {
-    return new Promise((resolve) => {
-        const sql = `INSERT INTO DocumentData (
-        DocId,
-        DocumentName,
-        IssuerName,
-        IssuerGmail,
-        CollectorName,
-        CollectorGmail,
-        EventName,
-        Status,
-        ReferenceLink,
-        DocumentHash
-      ) VALUES (?,?,?,?,?,?,?,?,?,?)`;
+const insertDocumentData = async (data) => {
+  const query = `
+    INSERT INTO DocumentData (
+      DocId,
+      DocumentName,
+      IssuerName,
+      IssuerGmail,
+      CollectorName,
+      CollectorGmail,
+      EventName,
+      Status,
+      ReferenceLink,
+      DocumentHash
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+  `;
 
-        const values = [
-            data.DocId,
-            data.DocumentName,
-            data.IssuerName,
-            data.IssuerGmail,
-            data.CollectorName,
-            data.CollectorGmail,
-            data.EventName,
-            data.Status,
-            data.ReferenceLink,
-            data.DocumentHash
-        ];
+  const values = [
+    data.DocId,
+    data.DocumentName,
+    data.IssuerName,
+    data.IssuerGmail,
+    data.CollectorName,
+    data.CollectorGmail,
+    data.EventName,
+    data.Status,
+    data.ReferenceLink,
+    data.DocumentHash
+  ];
 
-        connection.query(sql, values, (err, results) => {
-            if (err) {
-                console.log(err)
-                resolve(false);
-            } else {
-                resolve(true);
-            }
-        });
-    });
+  try {
+    await client.query(query, values);
+    return true;
+  } catch (error) {
+    console.error('Error inserting data:', error);
+    throw error;
+  }
 };
 
-const fetchPendingDocuments = (gmail) => {
-    return new Promise((resolve, reject) => {
-        const selectSql = `SELECT DocId, DocumentName FROM DocumentData WHERE CollectorGmail = ? AND Status = 'pending'`;
+const fetchPendingDocuments = async (gmail) => {
+  const query = `
+    SELECT DocId, DocumentName FROM DocumentData
+    WHERE CollectorGmail = $1 AND Status = 'Pending'
+  `;
 
-        connection.query(selectSql, [gmail], (err, results) => {
-            if (err) {
-                console.error(err);
-                return reject(err);
-            }
-
-            resolve(results);
-        });
-    });
+  try {
+    const result = await client.query(query, [gmail]);
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching pending documents:', error);
+    throw error;
+  }
 };
 
-const fetchAllDocumentDetails = (gmail, DocId) => {
-    return new Promise((resolve, reject) => {
-        const selectSql = `SELECT * FROM DocumentData WHERE CollectorGmail = ? AND Status = 'pending' AND DocId=?`;
+const fetchAllDocumentDetails = async (gmail, DocId) => {
+  const query = `
+    SELECT * FROM DocumentData
+    WHERE CollectorGmail = $1 AND Status = 'Pending' AND DocId = $2
+  `;
 
-        connection.query(selectSql, [gmail, DocId], (err, results) => {
-            if (err) {
-                console.error(err);
-                return reject(err);
-            }
-
-            resolve(results);
-        });
-    });
-}
-
-
-const updateDocumentStatus = (gmail,DocId) => {
-    return new Promise((resolve, reject) => {
-        const selectSql = `update DocumentData set Status="Collected" where CollectorGmail = ? AND Status = 'pending' AND DocId=?`;
-
-        connection.query(selectSql, [gmail, DocId], (err, results) => {
-            if (err) {
-                console.error(err);
-                return reject(err);
-            }
-
-            resolve(results);
-        });
-    });
-}
-const dataToInsert = {
-    DocID: 1,
-    DocumentName: 'Sample Document',
-    IssuerName: 'John Doe',
-    IssuerGmail: 'john.doe@example.com',
-    CollectorName: 'Jane Smith',
-    CollectorGmail: 'jane.smith@example.com',
-    EventName: 'Event Name',
-    Status: 'Pending',
-    ReferenceLink: 'https://example.com',
-    DocumentHash: 'abc123',
+  try {
+    const result = await client.query(query, [gmail, DocId]);
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching document details:', error);
+    throw error;
+  }
 };
 
+const updateDocumentStatus = async (gmail, DocId) => {
+  const query = `
+    UPDATE DocumentData
+    SET Status = 'Collected'
+    WHERE CollectorGmail = $1 AND Status = 'Pending' AND DocId = $2
+  `;
 
+  try {
+    await client.query(query, [gmail, DocId]);
+  } catch (error) {
+    console.error('Error updating document status:', error);
+    throw error;
+  }
+};
 
-
-module.exports = { insertDocumentData, fetchPendingDocuments, fetchAllDocumentDetails,updateDocumentStatus };
+module.exports = { insertDocumentData, fetchPendingDocuments, fetchAllDocumentDetails, updateDocumentStatus };

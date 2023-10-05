@@ -1,100 +1,74 @@
-const mysql = require('mysql2');
+const { Client } = require('pg');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Kartik@1507',
-  database: 'sih',
+// Create a PostgreSQL client with your ElephantSQL credentials
+const client = new Client({
+  user: 'nxnfvhmo',                    // User
+  host: 'satao.db.elephantsql.com',    // Host
+  database: 'nxnfvhmo',                // User & Default database
+  password: '6T9U1vBsbhd1b3mTBM4t_FJFwsW5buu3',           // Password (replace 'your-password' with your actual password)
+  port: 5432,                          // Default PostgreSQL port
 });
 
-connection.connect((err) => {
+client.connect((err) => {
   if (err) {
-    console.error('Error connecting to MySQL: ' + err.stack);
+    console.error('Error connecting to PostgreSQL: ' + err.stack);
     return;
   }
-  console.log('Connected to MySQL as id ' + connection.threadId);
+  console.log('Connected to PostgreSQL as process id ' + process.pid);
 });
 
-let query1=`select * from Users`;
-const insertInDatabase = async (gmail, userName,table) => {
-  const query2 = `INSERT INTO ${table} (gmail, userName) VALUES ("${gmail}", "${userName}")`;
+const insertInDatabase = async (gmail, userName, table) => {
+  const query = `INSERT INTO ${table} (gmail, userName) VALUES ($1, $2)`;
   const values = [gmail, userName];
 
   try {
-    await new Promise((resolve, reject) => {
-      connection.query(query2, values, (err, results) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(results);
-      });
-    });
+    await client.query(query, values);
   } catch (error) {
     console.error('Error inserting data:', error);
     throw error; // Re-throw the error if needed
   }
 };
 
-const fetchFromDatabase = (gmail,table) => {
-  return new Promise((resolve, reject) => {
-    const query1 = `SELECT * FROM ${table} WHERE gmail="${gmail}"`;
+const fetchFromDatabase = async (gmail, table) => {
+  const query = `SELECT * FROM ${table} WHERE gmail=$1`;
+  const values = [gmail];
 
-    connection.query(query1, (err, results) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-
-      resolve(results);
-    });
-  });
+  try {
+    const result = await client.query(query, values);
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
 };
 
-
-const isUserPresent=async (gmail,table)=>
-{
-   let mydata=await fetchFromDatabase(gmail,table)
-   if(mydata.length==0)
-   {
-      
-      return false
-   }
-   
-   return true;
-   
-}
-
-const fetchAllFromDatabase = (table) => {
-  return new Promise((resolve, reject) => {
-    const query1 = `SELECT * FROM ${table}`;
-
-    connection.query(query1, (err, results) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-
-      resolve(results);
-    });
-  });
+const isUserPresent = async (gmail, table) => {
+  const userData = await fetchFromDatabase(gmail, table);
+  return userData.length > 0;
 };
 
-const deleteAllFromDatabase = (table) => {
-  return new Promise((resolve, reject) => {
-    const query = `DELETE FROM ${table}`; // Replace 'Users' with the name of your table
+const fetchAllFromDatabase = async (table) => {
+  const query = `SELECT * FROM ${table}`;
 
-    connection.query(query, (err, results) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-
-      resolve(results);
-    });
-  });
+  try {
+    const result = await client.query(query);
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
 };
 
+const deleteAllFromDatabase = async (table) => {
+  const query = `DELETE FROM ${table}`;
+
+  try {
+    await client.query(query);
+  } catch (error) {
+    console.error('Error deleting data:', error);
+    throw error;
+  }
+};
 
 module.exports = {
   insertInDatabase,
