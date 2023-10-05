@@ -75,5 +75,6 @@ module.exports = {
   fetchFromDatabase,
   isUserPresent,
   fetchAllFromDatabase,
-  deleteAllFromDatabase
+  deleteAllFromDatabase,
+  client
 };

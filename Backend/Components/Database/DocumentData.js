@@ -9,13 +9,14 @@ const client = new Client({
   port: 5432,                          // Default PostgreSQL port
 });
 
-client.connect((err) => {
-  if (err) {
-    console.error('Error connecting to PostgreSQL: ' + err.stack);
-    return;
-  }
-  console.log('Connected to PostgreSQL as process id ' + process.pid);
-});
+
+// client.connect((err) => {
+//   if (err) {
+//     console.error('Error connecting to PostgreSQL: ' + err.stack);
+//     return;
+//   }
+//   console.log('Connected to PostgreSQL as process id ' + process.pid);
+// });
 
 const insertDocumentData = async (data) => {
   const query = `
