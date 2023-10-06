@@ -1,50 +1,101 @@
-const sql = require('mssql');
+const { Client } = require('pg');
 
-// Configuration for SQL Server
-const config = {
-  user: 'sql12649676',          // Database Username
-  password: '9mmACpQApR',    // Database Password (replace 'your_password' with your actual password)
-  server: 'sql12.freesqldatabase.com', // SQL Server host (Server/Host)
-  database: 'sql12649676',      // Database Name
-  port:3306, // Replace with your custom port number
+// Create a PostgreSQL client with your ElephantSQL credentials
+const client = new Client({
+  user: 'nxnfvhmo',
+  host: 'satao.db.elephantsql.com',
+  database: 'nxnfvhmo',
+  password: '6T9U1vBsbhd1b3mTBM4t_FJFwsW5buu3',
+  port: 5432,
+});
+
+client.connect((err) => {
+  if (err) {
+    console.error('Error connecting to PostgreSQL: ' + err.stack);
+    return;
+  }
+  console.log('Connected to PostgreSQL as process id ' + process.pid);
+});
+
+const insertInDatabase = async (gmail, userName, table) => {
+  const query = `INSERT INTO ${table} (gmail, userName) VALUES ($1, $2)`;
+  const values = [gmail, userName];
+
+  try {
+    await client.query(query, values);
+  } catch (error) {
+    console.error('Error inserting data:', error);
+    throw error; // Re-throw the error if needed
+  }
 };
 
-// Function to run a SQL query
-async function runQuery(query) {
+const fetchFromDatabase = async (gmail, table) => {
+  const query = `SELECT * FROM ${table} WHERE gmail=$1`;
+  const values = [gmail];
+
   try {
-    // Connect to the database
-    await sql.connect(config);
-
-    // Execute the query
-    const result = await sql.query(query);
-
-    // Return the query result
-    return result.recordset;
+    const result = await client.query(query, values);
+    return result.rows;
   } catch (error) {
-    console.error('Error executing query:', error.message);
+    console.error('Error fetching data:', error);
     throw error;
-  } finally {
-    // Close the database connection
-    sql.close();
   }
+};
+
+const isUserPresent = async (gmail, table) => {
+  const userData = await fetchFromDatabase(gmail, table);
+  return userData.length > 0;
+};
+
+const fetchAllFromDatabase = async (table) => {
+  const query = `SELECT * FROM ${table}`;
+
+  try {
+    const result = await client.query(query);
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+
+const deleteAllFromDatabase = async (table) => {
+  const query = `DELETE FROM ${table}`;
+
+  try {
+    await client.query(query);
+  } catch (error) {
+    console.error('Error deleting data:', error);
+    throw error;
+  }
+};
+
+const fetchPendingDocuments = async (gmail) => {
+  const query = `
+    SELECT DocId, DocumentName FROM DocumentData
+    WHERE CollectorGmail = $1 AND Status = 'Pending'
+  `;
+
+  try {
+    const result = await client.query(query, [gmail]);
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching pending documents:', error);
+    throw error;
+  }
+};
+
+const checkquery = async () => {
+  let result = await fetchPendingDocuments("kartik150704@gmail.com");
+  console.log(result)
 }
 
-// Example usage:
+checkquery();
+module.exports = {
+  insertInDatabase,
+  fetchFromDatabase,
+  isUserPresent,
+  fetchAllFromDatabase,
+  deleteAllFromDatabase,
 
-let query1=`
-create database SIH`
-const query = `
-create table Users
-(
-	id int auto_increment primary key,
-    gmail varchar(20),
-    userName varchar(20)
-);
-`;
-runQuery(query1)
-  .then((data) => {
-    console.log('Query Result:', data);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
+};

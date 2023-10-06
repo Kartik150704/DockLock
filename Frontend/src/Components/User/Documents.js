@@ -10,10 +10,12 @@ const MyDocuments = () => {
   const [userName, setUserName] = useState('');
   const [privateKey, setPrivateKey] = useState("");
   const [userType, setUserType] = useState(null)
-  const [showLoadingScreen,setShowLoadingScreen]=useState(false)
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false)
   const [documents, setDocuments] = useState([
 
   ]);
+
+
   useEffect(() => {
     setUserEmail(getCommonValue("userEmail"))
     setUserName(getCommonValue("userName"))
@@ -26,6 +28,10 @@ const MyDocuments = () => {
       setUserName(y);
       setUserType(z)
       fetchPendingDocuments(x)
+      fetchPendingDocuments(x)
+     
+
+
     }
   }, [])
   const fetchPendingDocuments = async (email) => {
@@ -34,7 +40,14 @@ const MyDocuments = () => {
         gmail: email
       }
       let pendingDocuments = await fetchAPI("https://doclock-backend.onrender.com/user/fetchpendingdocument", userData, "POST")
-      setDocuments(pendingDocuments)
+      
+      console.log(pendingDocuments)
+      const convertedDocuments = pendingDocuments.map((item) => ({
+        DocId: item.docid,
+        DocumentName: item.documentname,
+      }));
+      setDocuments(convertedDocuments)
+
 
     }
   }
@@ -47,7 +60,7 @@ const MyDocuments = () => {
       return;
     }
     setShowLoadingScreen(true)
-    // console.log(privateKey)
+    console.log(documentId)
     let tx = await AddDataToBlockchain(privateKey, documentId)
     console.log(tx)
     setShowLoadingScreen(false)
@@ -72,41 +85,41 @@ const MyDocuments = () => {
 
   const AddDataToBlockchain = async (privateKey, DocId) => {
 
-    
+
     let userData = {
       gmail: userEmail,
       DocId: DocId,
-      userName:userName
+      userName: userName
     }
     let response = await fetchAPI("https://doclock-backend.onrender.com/user/claimdocument", userData, "POST");
     let stampData = {
-      documentHash: response.DocumentHash,
+      documentHash: response.documenthash,
       privateKey: privateKey
     }
-
-    console.log(response)
+   
+    
     let documentData = await fetchAPI("https://doclock-backend.onrender.com/createstamp", stampData, "POST");
 
     let signature = documentData.signature
-    response.DocId=await (response.DocId).toString()
+    response.docid = await (response.docid).toString()
     let transactionData = {
-      DocumentHash: response.DocumentHash,
+      DocumentHash: response.documenthash,
       signature: signature,
-      IssuerGmail: response.IssuerGmail,
-      IssuerName: response.IssuerName,
-      CollectorName: response.CollectorName,
-      DocId:response.DocId
+      IssuerGmail: response.issuergmail,
+      IssuerName: response.issuername,
+      CollectorName: response.collectorname,
+      DocId: response.docid
 
     }
-    
+    console.log(transactionData)
     let tx = await StoreToBlockchain(transactionData);
-    console.log(tx)
+    
     if (tx) {
-      
-      console.log(response.ReferenceLink)
-      
-      let tx = await StoreDataReference(privateKey, DocId, response.ReferenceLink);
-      
+
+      console.log(response.referencelink)
+
+      let tx = await StoreDataReference(privateKey, DocId, response.referencelink);
+
       await fetchAPI("https://doclock-backend.onrender.com/user/updatestatus", userData, "POST");
     }
     return tx;
@@ -114,15 +127,15 @@ const MyDocuments = () => {
 
   return (
     <div className="document-list-container">
-    {showLoadingScreen && <LoadingScreen>
-      <h2>Claiming the Document....</h2>
-    </LoadingScreen>}
+      {showLoadingScreen && <LoadingScreen>
+        <h2>Claiming the Document....</h2>
+      </LoadingScreen>}
       <h2>Document List</h2>
-      {documents.length==0 &&  <p>All Documents are Collected already</p>}
+      {documents.length == 0 && <p>All Documents are Collected already</p>}
       <ul className="document-list">
         {documents.map((pendingDocument) => (
           <li key={pendingDocument.DocId} className="document-item">
-          <spa>{pendingDocument.DocId}</spa>
+            <spa>{pendingDocument.DocId}</spa>
             <span>{pendingDocument.DocumentName}</span>
             <button onClick={() => handleClaimDocument(pendingDocument.DocId)} className="claim-btn">
               Claim Document
@@ -138,10 +151,10 @@ const MyDocuments = () => {
         id="fileInput"
         className="file-input"
       />
-      {documents.length!=0 && <label htmlFor="fileInput" className="upload-label">
+      {documents.length != 0 && <label htmlFor="fileInput" className="upload-label">
         Upload Private Key
       </label>}
-      {documents.length!=0 && <p>These are the Documents , You can claim these to store to blockchain</p>}
+      {documents.length != 0 && <p>These are the Documents , You can claim these to store to blockchain</p>}
     </div>
   );
 };

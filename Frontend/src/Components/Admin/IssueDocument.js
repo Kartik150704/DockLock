@@ -78,7 +78,7 @@ const IssueDocument = () => {
             ReferenceLink: ReferenceLink,
             DocumentHash: hash,
         };
-        let response = await fetchAPI("http://localhost:8000/issuer/adddocument", userData, "POST")
+        let response = await fetchAPI("https://doclock-backend.onrender.com/issuer/adddocument", userData, "POST")
         setShowLoadingScreen(false);
         console.log(response)
         if (response.dataAdded) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GetDataReference } from '../Blockchain/UserFunctions';
 import { CommonValueProvider, useCommonValue } from "../ContextAPI/ContextAPI";
-
+import QRCodeGenerator from '../QRCode/QRCode';
 import './RetrieveDocument.css'
 const RetrieveDocument = () => {
 
@@ -42,10 +42,15 @@ const RetrieveDocument = () => {
 
   const getReferenceLink = async () => {
     let link = await GetDataReference(privateKey, parseInt(DocId));
-    window.open(link, '_blank');
-    console.log("Link", link)
+    // window.open(link, '_blank');
+    // console.log("Link", link)
     setReferenceLink(link);
   };
+
+  const openDocument=()=>
+  {
+    window.open(referenceLink, '_blank');
+  }
 
   return (
     <div className="user-form">
@@ -73,13 +78,16 @@ const RetrieveDocument = () => {
             />
           </div>
           <button onClick={getReferenceLink} className="form-button">Process File</button>
-          {file && (
+          {referenceLink && (
             <div className="selected-file">
-              <h3 className="selected-file-heading">Selected Text File:</h3>
-              <p className="selected-file-name">File Name: {file.name}</p>
+              <h3 className="selected-file-heading">Document Generated Successfully </h3>
+             
             </div>
           )}
-          <p className="reference-link">{referenceLink}</p>
+         { referenceLink &&<button className='form-button' onClick={openDocument}>Get Document</button>}
+          {referenceLink &&<p className="reference-link">OR </p>}
+          {referenceLink &&<p className="reference-link">Scan the QRCode below to retrieve your document</p>}
+         { referenceLink && <QRCodeGenerator value={referenceLink}/>}
         </div>
       )}
     </div>
