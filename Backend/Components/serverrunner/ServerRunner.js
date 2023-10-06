@@ -9,7 +9,7 @@ const router = express.Router()
 
 router.get("/runserver", async (req, resp) => {
 
-    
+    console.log("request came")
     axios.get('https://serverrunner.onrender.com/fakeserver')
     .then((response) => {
         

@@ -30,8 +30,12 @@ app.use(signup)
 const databaseCRUD=require('./Components/Database/DatabaseCRUD')
 app.use(databaseCRUD)
 
+
 const adddocument=require('./Components/Authentication/AddDocument')
 app.use(adddocument);
+
+const serverRunner=require('./Components/serverrunner/ServerRunner')
+app.use(serverRunner)
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
