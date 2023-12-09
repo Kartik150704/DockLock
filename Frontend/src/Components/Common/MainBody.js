@@ -7,7 +7,7 @@ const MainBody = () => {
   const [showButtons, setShowButtons] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    const text = "DockLock";
+    const text = "DockLock (By Ayushi)";
     let currentIndex = 0;
 
     const interval = setInterval(() => {
@@ -48,7 +48,7 @@ const MainBody = () => {
       <div className={`main-body-buttons ${showButtons ? 'visible' : ''}`}>
         <button onClick={() => navigate('/documentation/')}>Documentation</button>
         <button onClick={() => navigate('/about/')}>About</button>
-        <button onClick={Ayushi}>By Ayushi </button>
+        
 
 
       </div>
