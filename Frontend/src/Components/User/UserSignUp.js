@@ -20,6 +20,8 @@ const UserSignUp = () => {
             </LoadingScreen>
         )
     }
+
+    
     const signup = async () => {
         let response = await AuthenticateWindow();
         console.log(response);

@@ -5,7 +5,7 @@ const MainBody = () => {
   const [word, setWord] = useState('');
   const [showSecondaryText, setShowSecondaryText] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     const text = "DockLock";
     let currentIndex = 0;
@@ -38,14 +38,19 @@ const MainBody = () => {
       }
     }, 150); // Adjust the interval duration as needed
   };
-
+  const Ayushi = () => {
+    window.location.href = "https://www.youtube.com/@Being_Ronak";
+  }
   return (
     <div className="letter-animation">
       <h1>{word}</h1>
       <h2 className={`secondary-text ${showSecondaryText ? 'visible' : ''}`}>Let's Get Verified</h2>
       <div className={`main-body-buttons ${showButtons ? 'visible' : ''}`}>
-        <button onClick={()=>navigate('/documentation/')}>Documentation</button>
-        <button onClick={()=>navigate('/about/')}>About</button>
+        <button onClick={() => navigate('/documentation/')}>Documentation</button>
+        <button onClick={() => navigate('/about/')}>About</button>
+        <button onClick={Ayushi}>By Ayushi </button>
+
+
       </div>
     </div>
   );
