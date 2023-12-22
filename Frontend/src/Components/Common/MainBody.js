@@ -7,7 +7,7 @@ const MainBody = () => {
   const [showButtons, setShowButtons] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    const text = "DockLock (By Ayushi)";
+    const text = "DockLock";
     let currentIndex = 0;
 
     const interval = setInterval(() => {
@@ -38,9 +38,7 @@ const MainBody = () => {
       }
     }, 150); // Adjust the interval duration as needed
   };
-  const Ayushi = () => {
-    window.location.href = "https://www.youtube.com/@Being_Ronak";
-  }
+  
   return (
     <div className="letter-animation">
       <h1>{word}</h1>
